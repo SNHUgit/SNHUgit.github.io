@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TEMPLATE_PAGE</title>
+	<!-- css code found in style.css -->	
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+	<body>
+		<!-- header code found in header fragment-->
+    	<div th:replace="~{fragments/header :: header}"></div>
+    	<div class="container">
+		<!-- sidebar code found in sidebar fragment-->	
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+				
+				<h2>Something went wrong</h2>
+				<p th:text="${errorMessage}"></p><br><br>
+				<p th:if="${errorDetails}" th:text="${errorDetails}"></p>
+
+			</main>
+    	</div>
+		<!-- sidebar code found in footer fragment-->	
+		<div th:replace="~{fragments/footer :: footer}"></div>
+	</body>
+</html>

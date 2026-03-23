@@ -1,0 +1,127 @@
+ package com.cs499.organizer.service;
+
+import com.cs499.organizer.IdGenerator;
+import com.cs499.organizer.model.Task;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TaskService {
+
+	private List<Task> tasks;
+	
+	public TaskService() { 
+		tasks = new ArrayList<>();
+	}
+	
+	// Add New Task
+	public void add(Task newTask) {
+		
+		boolean isDuplicate = false;
+		
+		for (Task task : tasks) {
+			if(task.getId().equals(newTask.getId())) {
+				isDuplicate = true;
+				break;
+			}
+		}
+		if (isDuplicate) {
+			throw new IllegalArgumentException("Cannot add task with duplicate id: " + newTask.getId());
+		}
+		tasks.add(newTask);
+	}
+	
+	// Delete Task
+	public void delete(String id) {
+	    for (int i = 0; i < tasks.size(); i++) {
+	        if (tasks.get(i).getId().equals(id)) {
+	        	tasks.remove(i);
+	            return; 
+	        }
+	    }
+	}
+	
+	// Update Task
+	public void updateName(String id, String name) {
+	    for (Task task : tasks) {
+	        if (task.getId().equals(id)) {
+	            task.setName(name);
+	            return;
+	        }
+	    }
+	}
+	
+	// Update Description
+	public void updateDescription(String id, String description) {
+	    for (Task task : tasks) {
+	        if (task.getId().equals(id)) {
+	            task.setDescription(description);
+	            return;
+	        }
+	    }
+	}
+	
+	// Get Task
+	public Task get(String id) {
+		Task foundTask = null;
+		
+		for(Task task: tasks) {
+			if (task.getId().equals(id)) {
+				foundTask = task;
+				break;
+			}
+		}
+		
+		if (foundTask == null) {
+	        throw new IllegalArgumentException("Task with ID " + id + " not found.");
+	    }
+		
+		return new Task(foundTask);
+	}
+
+	// Search Name
+	public List<Task> nameSearch(String name) {
+	    List<Task> foundTasks = new ArrayList<>();
+
+	    for (Task task : tasks) {
+	        if (task.getName().toLowerCase().contains(name.toLowerCase())) {
+	            foundTasks.add(new Task(task));
+	        }
+	    }
+
+	    return foundTasks;
+	}
+	
+	// Get all Task
+	public List<Task> getAllTask(){
+		// make a copy of the list and returns the copy
+		List<Task> taskCopy = new ArrayList<>(tasks);
+		return taskCopy;
+	}
+	
+	
+	// Checking id numbers for duplicates
+	private String checkForDuplicateIds() {
+	    String id;
+	    boolean duplicate;
+
+	    do {
+	        id = IdGenerator.getFreshID();
+	        duplicate = false;
+
+	        for (Task task : tasks) {
+	            if (task.getId().equals(id)) {
+	                duplicate = true;
+	                break;
+	            }
+	        }
+	    } while (duplicate);
+
+	    return id;
+	}
+	
+	// Public way to get new ID
+	public String getNewId() {
+		return checkForDuplicateIds();
+	}
+}

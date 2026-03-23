@@ -1,0 +1,21 @@
+package com.cs499.organizer.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+
+
+@Controller
+public class LandingController {
+
+	//create mapping for home page
+	
+	@GetMapping("/")
+	public String homePage(Model theModel) {
+		
+        theModel.addAttribute("theDate", java.time.LocalDateTime.now());
+		
+		return "landing";
+	}
+	
+}

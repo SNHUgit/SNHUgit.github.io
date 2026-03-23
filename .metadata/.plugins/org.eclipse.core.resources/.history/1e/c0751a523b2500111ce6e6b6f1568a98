@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+	<!-- css code found in style.css -->	
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+	<!-- optional for tabs-->
+	<!-- <script th:src="@{/js/task-tabs.js}"></script> -->
+</head>
+	<body>
+		<!-- header code found in header fragment-->
+    	<div th:replace="fragments/header :: header"></div>
+    	<div class="container">
+		<!-- sidebar code found in sidebar fragment-->	
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        	<main class="content">
+				<!--Code above should be altered withen fragments-->
+				<!--*********************************************-->
+				
+				<!--Page Title-->
+				<h2>Page Title</h2>
+				
+				<!--If tabs are used in page-->
+				<div class="tab">
+				    <button type="button" onclick="showTab('tab1label')">tab 1 text</button>
+				    <button type="button" onclick="showTab('tab2label')">tab 2 text</button>
+				    <button type="button" onclick="showTab('tab3label')">tab 3 text</button>
+					<button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+				</div>
+				
+				<!-- Tab content -->
+				<div id="tab1label" class="tabcontent">
+				  <h3>Tab Title</h3>
+				  <p>Tab content.</p>
+				</div>
+				
+				
+				<!--*********************************************-->
+				<!-- Code below should be altered withen fragments-->
+			</main>
+    	</div>
+		<!-- sidebar code found in footer fragment-->	
+		<div th:replace="fragments/footer :: footer"></div>
+	</body>
+</html>

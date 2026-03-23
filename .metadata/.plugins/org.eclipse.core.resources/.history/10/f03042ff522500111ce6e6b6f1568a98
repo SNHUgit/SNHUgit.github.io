@@ -1,0 +1,8 @@
+
+// Takes values stored on the edit button and copies them into the edit task form
+function EditTaskFromButton(button) {
+    document.getElementById("editTaskId").value = button.dataset.id;
+    document.getElementById("editTaskName").value = button.dataset.name;
+    document.getElementById("editTaskDescription").value = button.dataset.description;
+    showTab("editTask");
+}

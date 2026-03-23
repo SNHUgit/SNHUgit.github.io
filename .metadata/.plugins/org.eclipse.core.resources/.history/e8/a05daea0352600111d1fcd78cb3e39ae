@@ -1,0 +1,75 @@
+package com.cs499.organizer;
+
+import java.util.ArrayList;
+import java.util.Random;
+import com.cs499.organizer.model.Task;
+import com.cs499.organizer.model.Contact;
+import com.cs499.organizer.model.Appointment;
+
+public class IdGenerator {
+	
+	// Generate random 8 number string
+	public static String getFreshID() {
+		Random random = new Random();
+		int idGenerator = random.nextInt(8);
+		String id = Integer.toString(idGenerator); 
+		return id;
+	}
+	
+	// Probably going to be removed when database is added.
+	// If not add interface to models to allow (ArrayList<?>) to be passed in 
+	
+	// Public way to get new ID for task
+	public String getNewTaskId(ArrayList<Task> tasks) {
+		String id;
+		boolean duplicate;
+		do {
+	        id = getFreshID();
+	        duplicate = false;
+
+	        for (Task task : tasks) {
+	            if (task.getId().equals(id)) {
+	                duplicate = true;
+	                break;
+	            }
+	        }
+	    } while (duplicate);
+	return id;
+	}
+	
+	// Public way to get new ID for contact
+	public String getNewContactId(ArrayList<Contact> contacts) {
+	    String id;
+	    boolean duplicate;
+	    do {
+	        id = getFreshID();
+	        duplicate = false;
+
+	        for (Contact contact : contacts) {
+	            if (contact.getId().equals(id)) {
+	                duplicate = true;
+	                break;
+	            }
+	        }
+	    } while (duplicate);
+	    return id;
+	}
+
+	// Public way to get new ID for appointment
+	public String getNewAppointmentId(ArrayList<Appointment> appointments) {
+	    String id;
+	    boolean duplicate;
+	    do {
+	        id = getFreshID();
+	        duplicate = false;
+
+	        for (Appointment appointment : appointments) {
+	            if (appointment.getId().equals(id)) {
+	                duplicate = true;
+	                break;
+	            }
+	        }
+	    } while (duplicate);
+	    return id;
+	}
+}

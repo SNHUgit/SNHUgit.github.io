@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+formatter_profile=org.eclipse.jdt.ui.default.eclipse_profile
+formatter_settings_version=23
+org.eclipse.jdt.ui.javadoc=false
+org.eclipse.jdt.ui.usemarkdown=false

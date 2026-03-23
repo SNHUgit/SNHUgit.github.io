@@ -1,0 +1,18 @@
+//Fuction to creat tabs pass in the tab to load as tabId
+function showTab(tabId) {
+		
+	//Find all tab-section class's in template html pages
+	const sections = document.querySelectorAll(".tabcontent");
+	
+	//Hides all tab-slection class's from being displayed
+	sections.forEach(section => section.style.display = "none");
+	
+	// If no tabId was passed in, stop here
+	if (!tabId) {
+	    return;
+	}
+	//Find tabID passed in and display it
+    document.getElementById(tabId).style.display = "block";
+    
+	}
+

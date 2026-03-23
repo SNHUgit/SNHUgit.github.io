@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Browser tab title -->
+    <title>Task</title>
+
+    <!-- Connect this page to the CSS file -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <script>
+        /*
+         * This function is used for the tab layout.
+         * It hides all tab sections first, then shows the one that was clicked.
+         * I used this to keep Add, Show, and Search on one page without making separate pages.
+         */
+        function showTab(tabId) {
+            const sections = document.querySelectorAll(".tab-section");
+            sections.forEach(section => section.style.display = "none");
+            document.getElementById(tabId).style.display = "block";
+        }
+
+        /*
+         * When the page first loads, this makes the Add Task tab show first.
+         * That way the user sees something immediately instead of a blank area.
+         */
+        window.onload = function () {
+            showTab("addTask");
+        };
+    </script>
+</head>
+<body>
+
+    <!-- Main page header -->
+    <header class="header">
+        <h1>Organizer</h1>
+    </header>
+
+    <div class="container">
+
+		<div th:replace="fragments/header :: header"></div>
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+		<div th:replace="fragments/footer :: footer"></div>
+
+        <!-- Main page content -->
+        <main class="content">
+            <h2>Task</h2>
+
+            <!-- Buttons used like tabs -->
+            <div class="tabs">
+                <button type="button" onclick="showTab('addTask')">Add Task</button>
+                <button type="button" onclick="showTab('showTask')">Show Task</button>
+                <button type="button" onclick="showTab('searchTask')">Search Task</button>
+            </div>
+
+            <!-- Add Task tab -->
+            <div id="addTask" class="tab-section">
+                <h3>Add Task</h3>
+
+                <!--
+                    This form sends task data to the controller.
+                    The controller should save the new task and return the page again.
+                -->
+                <form th:action="@{/task/add}" method="post">
+                    <label for="taskName">Task Name:</label><br>
+                    <input type="text" id="taskName" name="taskName"><br><br>
+
+                    <label for="description">Description:</label><br>
+                    <input type="text" id="description" name="description"><br><br>
+
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+
+            <!-- Show Task tab -->
+            <div id="showTask" class="tab-section" style="display:none;">
+                <h3>Show Tasks</h3>
+
+                <!--
+                    This table shows all tasks.
+                    th:each loops through the list of tasks sent from the controller.
+                -->
+                <table>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                    </tr>
+
+                    <tr th:each="task : ${tasks}">
+                        <td th:text="${task.name}"></td>
+                        <td th:text="${task.description}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Search Task tab -->
+            <div id="searchTask" class="tab-section" style="display:none;">
+                <h3>Search Task</h3>
+
+                <!--
+                    This form is used to search tasks by a keyword.
+                    The controller can search task name, description, or both.
+                -->
+                <form th:action="@{/task/search}" method="get">
+                    <label for="taskKeyword">Search by keyword:</label><br>
+                    <input type="text" id="taskKeyword" name="keyword"><br><br>
+
+                    <button type="submit">Search</button>
+                </form>
+
+                <h3>Search Results</h3>
+
+                <!--
+                    This table displays only the matching task search results.
+                    I changed the name to taskSearchResults so it is easier to understand.
+                -->
+                <table>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                    </tr>
+
+                    <tr th:each="task : ${taskSearchResults}">
+                        <td th:text="${task.name}"></td>
+                        <td th:text="${task.description}"></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer matches header color -->
+    <footer class="footer"></footer>
+
+</body>
+</html>

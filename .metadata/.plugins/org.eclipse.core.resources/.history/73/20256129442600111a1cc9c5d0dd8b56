@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Title shown on browser tab -->
+    <title>Home Page</title>
+
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+
+    <!-- Top header area -->
+    <header class="header">
+        <h1>Organizer</h1>
+    </header>
+
+    <div class="container">
+
+        <!-- Left side navigation bar -->
+        <nav class="sidebar">
+            <ul>
+                <li><a th:href="@{/task}">Task</a></li>
+                <li><a th:href="@{/appointment}">Appointment</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main content area on the right -->
+        <main class="content">
+           
+        </main>
+    </div>
+
+    <!-- Footer area -->
+    <footer class="footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+fragments/error-message.html
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="errorMessage" th:if="${errorMessage}" class="error-box">
+        <p th:text="${errorMessage}"></p>
+    </div>
+</body>
+</html>

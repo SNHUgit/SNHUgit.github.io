@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Browser tab title -->
+    <title>Appointment</title>
+
+    <!-- Connect this page to the CSS file -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <script>
+        /*
+         * This controls the tabs on the Appointment page.
+         * It hides all tab sections first and then shows the selected one.
+         */
+        function showTab(tabId) {
+            const sections = document.querySelectorAll(".tab-section");
+            sections.forEach(section => section.style.display = "none");
+            document.getElementById(tabId).style.display = "block";
+        }
+
+        /*
+         * Show the Add Appointment tab first when the page loads.
+         */
+        window.onload = function () {
+            showTab("addAppointment");
+        };
+    </script>
+</head>
+<body>
+
+    <!-- Main page header -->
+    <header class="header">
+        <h1>Organizer</h1>
+    </header>
+
+    <div class="container">
+
+        <!-- Left side navigation menu -->
+        <nav class="sidebar">
+            <ul>
+                <li><a th:href="@{/task}">Task</a></li>
+                <li><a th:href="@{/appointment}">Appointment</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main page content -->
+        <main class="content">
+            <h2>Appointment</h2>
+
+            <!-- Buttons used like tabs -->
+            <div class="tabs">
+                <button type="button" onclick="showTab('addAppointment')">Add Appointment</button>
+                <button type="button" onclick="showTab('showAppointment')">Show Appointment</button>
+                <button type="button" onclick="showTab('searchAppointment')">Search Appointment</button>
+            </div>
+
+            <!-- Add Appointment tab -->
+            <div id="addAppointment" class="tab-section">
+                <h3>Add Appointment</h3>
+
+                <!--
+                    This form adds an appointment using only description and date.
+                    That matches the fields you said you wanted for this page.
+                -->
+                <form th:action="@{/appointment/add}" method="post">
+                    <label for="appointmentDescription">Description:</label><br>
+                    <input type="text" id="appointmentDescription" name="description"><br><br>
+
+                    <label for="appointmentDate">Date:</label><br>
+                    <input type="date" id="appointmentDate" name="date"><br><br>
+
+                    <button type="submit">Add Appointment</button>
+                </form>
+            </div>
+
+            <!-- Show Appointment tab -->
+            <div id="showAppointment" class="tab-section" style="display:none;">
+                <h3>Show Appointments</h3>
+
+                <!-- Display all appointments -->
+                <table>
+                    <tr>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+
+                    <tr th:each="appointment : ${appointments}">
+                        <td th:text="${appointment.description}"></td>
+                        <td th:text="${appointment.date}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Search Appointment tab -->
+            <div id="searchAppointment" class="tab-section" style="display:none;">
+                <h3>Search Appointment</h3>
+
+                <!--
+                    This search gives two choices:
+                    1. search by date
+                    2. search by a word in the description
+                -->
+                <form th:action="@{/appointment/search}" method="get">
+                    <label for="appointmentSearchBy">Search By:</label><br>
+                    <select id="appointmentSearchBy" name="searchBy">
+                        <option value="date">Date</option>
+                        <option value="description">Word in Description</option>
+                    </select><br><br>
+
+                    <label for="appointmentKeyword">Search Value:</label><br>
+                    <input type="text" id="appointmentKeyword" name="keyword"><br><br>
+
+                    <button type="submit">Search</button>
+                </form>
+
+                <h3>Search Results</h3>
+
+                <!--
+                    This table only displays appointment matches from the search.
+                    I renamed the model attribute to appointmentSearchResults for clarity.
+                -->
+                <table>
+                    <tr>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+
+                    <tr th:each="appointment : ${appointmentSearchResults}">
+                        <td th:text="${appointment.description}"></td>
+                        <td th:text="${appointment.date}"></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer matches header color -->
+    <footer class="footer"></footer>
+
+</body>
+</html>

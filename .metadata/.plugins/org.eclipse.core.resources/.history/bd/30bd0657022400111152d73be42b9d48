@@ -1,0 +1,18 @@
+
+package com.cs499.organizer.controller.copy;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class AppointmentController {
+
+	//create mapping for home page
+	
+	@GetMapping("/appointment")
+	public String appointmentPage() {
+				
+		return "appointment";
+	}
+	
+}

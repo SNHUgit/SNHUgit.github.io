@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <script>
+        function showTab(tabId) {
+            const sections = document.querySelectorAll(".tab-section");
+            sections.forEach(section => section.style.display = "none");
+            document.getElementById(tabId).style.display = "block";
+        }
+
+        window.onload = function () {
+            showTab("addTask");
+        };
+    </script>
+</head>
+<body>
+
+    <div th:replace="fragments :: header"></div>
+
+    <div class="container">
+
+        <div th:replace="fragments :: sidebar"></div>
+
+        <main class="content">
+            <h2>Task</h2>
+
+            <div class="tabs">
+                <button type="button" onclick="showTab('addTask')">Add Task</button>
+                <button type="button" onclick="showTab('showTask')">Show Task</button>
+                <button type="button" onclick="showTab('searchTask')">Search Task</button>
+            </div>
+
+            <div id="addTask" class="tab-section">
+                <h3>Add Task</h3>
+                <form th:action="@{/task/add}" method="post">
+                    <label for="taskName">Task Name:</label><br>
+                    <input type="text" id="taskName" name="taskName"><br><br>
+
+                    <label for="description">Description:</label><br>
+                    <input type="text" id="description" name="description"><br><br>
+
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+
+            <div id="showTask" class="tab-section" style="display:none;">
+                <h3>Show Tasks</h3>
+                <table>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                    </tr>
+
+                    <tr th:each="task : ${tasks}">
+                        <td th:text="${task.name}"></td>
+                        <td th:text="${task.description}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="searchTask" class="tab-section" style="display:none;">
+                <h3>Search Task</h3>
+
+                <form th:action="@{/task/search}" method="get">
+                    <label for="taskKeyword">Search by keyword:</label><br>
+                    <input type="text" id="taskKeyword" name="keyword"><br><br>
+
+                    <button type="submit">Search</button>
+                </form>
+
+                <h3>Search Results</h3>
+                <table>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                    </tr>
+
+                    <tr th:each="task : ${taskSearchResults}">
+                        <td th:text="${task.name}"></td>
+                        <td th:text="${task.description}"></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div th:replace="fragments :: footer"></div>
+
+</body>
+</html>

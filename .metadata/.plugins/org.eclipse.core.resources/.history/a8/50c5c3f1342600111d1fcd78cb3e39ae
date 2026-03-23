@@ -1,0 +1,76 @@
+package com.cs499.organizer.controller;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.cs499.organizer.model.Task;
+import com.cs499.organizer.service.TaskService;
+
+@Controller
+public class TaskController {
+
+    private final TaskService taskService = new TaskService();
+
+    // Initialize task page
+    @GetMapping("/task")
+    public String taskPage(Model model) {
+        model.addAttribute("tasks", taskService.getAllTask());
+        model.addAttribute("taskSearchResults", new ArrayList<Task>());
+        return "task";
+    }
+
+    // Adds new Task
+    @PostMapping("/task/add")
+    public String addTask(@RequestParam String addTaskName,
+                          @RequestParam String addTaskDescription,
+                          Model model) {
+
+    	// Creates and adds new service
+        Task newTask = new Task(taskService.getNewId(), addTaskName, addTaskDescription);
+        taskService.add(newTask);
+
+        // Updates task list
+        model.addAttribute("tasks", taskService.getAllTask());
+        model.addAttribute("taskSearchResults", new ArrayList<Task>());
+        return "task";
+    }
+    
+    // Edit Task
+    @PostMapping("/task/edit")
+    public String updateTask(@RequestParam String id,
+                             @RequestParam String editTaskName,
+                             @RequestParam String editTaskDescription) {
+    	
+    	// Updates Task Service
+        taskService.updateName(id, editTaskName);
+        taskService.updateDescription(id, editTaskDescription);
+        return "redirect:/task";
+    }
+    
+    // Delete Task
+    @PostMapping("/task/delete")
+    public String deleteTask(@RequestParam String id) {
+        taskService.delete(id);
+        return "redirect:/task";
+    }
+
+    // Search Task
+    @GetMapping("/task/search")
+    public String searchTask(@RequestParam String searchTask, Model model) {
+    	// Refresh task list, on show task page. Was disappearing after a search until it was added.
+    	model.addAttribute("tasks", taskService.getAllTask());
+    	
+        model.addAttribute("taskSearchResults", taskService.nameSearch(searchTask));
+        model.addAttribute("searchTaskValue", searchTask);
+        
+        // Stay in current tab
+        model.addAttribute("activeTab", "searchTask");
+        return "task";
+    }
+    
+}

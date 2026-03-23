@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TEMPLATE_PAGE</title>
+	<!-- css code found in style.css -->	
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+	<body>
+		<!-- header code found in header fragment-->
+    	<div th:replace="~{fragments/header :: header}"></div>
+    	<div class="container">
+		<!-- sidebar code found in sidebar fragment-->	
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        	<main class="content">
+				<!-- used to keep active tab active-->
+				<input type="hidden" id="activeTab" th:value="${activeTab}">
+			
+				<!--********************************************************-->
+				<!--Header Scripts & Sidebar should altered withen fragments-->
+				<!--********************************************************-->
+				
+				<!--Page Title-->
+				
+				<!--*********************************************-->
+				<!--Code below should be altered withen fragments-->.
+				<!--*********************************************-->
+			</main>
+    	</div>
+		<!-- sidebar code found in footer fragment-->	
+		<div th:replace="~{fragments/footer :: footer}"></div>
+	</body>
+</html>

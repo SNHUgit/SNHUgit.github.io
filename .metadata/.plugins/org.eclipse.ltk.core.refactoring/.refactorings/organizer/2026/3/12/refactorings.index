@@ -1,0 +1,29 @@
+1773886095351	Move compilation unit
+1773886108161	Delete element
+1773886366562	Rename type 'landingController'
+1773887554976	Delete element
+1773965432599	Delete element
+1773965465866	Copy package
+1773965473521	Delete element
+1773965512955	Copy package
+1773965557241	Delete element
+1773965673541	Rename package 'com.cs499.organizer.service.model'
+1773965686608	Rename package 'com.cs499.organizer.service.repository'
+1773966505880	Move compilation unit
+1773971689053	Copy package
+1773971700756	Copy package
+1773972667077	Delete element
+1773972688137	Rename package 'com.cs499.organizer.repository.copy'
+1773972761341	Copy package
+1773972780385	Copy package
+1773972789382	Delete element
+1773972805505	Rename package 'com.cs499.organizer.repository.copy'
+1773972890117	Delete element
+1773972940263	Delete element
+1773972976024	Delete element
+1773973005653	Delete element
+1774033904321	Rename package 'com.cs499.orgranizer.repository'
+1774033914337	Delete element
+1774062837114	Move 'fragments' to 'templates'
+1774116566643	Rename resource 'task-tabs.js'
+1774117239445	Rename resource 'tasks.js'

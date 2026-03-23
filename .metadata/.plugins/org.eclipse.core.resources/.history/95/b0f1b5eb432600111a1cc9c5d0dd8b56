@@ -1,0 +1,62 @@
+package com.cs499.organizer.service;
+
+import com.cs499.organizer.model.Appointment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AppointmentService {
+
+//Appointment Service Requirements		
+//		- add appointments with a unique appointment ID - done
+//		- delete appointments per appointment ID - done
+	
+	private List<Appointment> appointments;
+
+	public AppointmentService() {
+		appointments = new ArrayList<>();
+	}
+	
+	public void add(Appointment newAppointment) {
+		
+		boolean isDuplicate = false;
+		
+		for (Appointment appointment : appointments) {
+			if(appointment.getId().equals(newAppointment.getId())) {
+				isDuplicate = true;
+				break;
+			}
+		}
+		if (isDuplicate) {
+			throw new IllegalArgumentException("Cannot add appointment with duplicate id: " + newAppointment.getId());
+		}
+		appointments.add(newAppointment);
+	}
+	
+	public void delete(String id) {
+	    for (int i = 0; i < appointments.size(); i++) {
+	        if (appointments.get(i).getId().equals(id)) {
+	        	appointments.remove(i);
+	            return; 
+	        }
+	    }
+	}
+
+	public Appointment get(String id) {
+		Appointment foundAppointment = null;
+		
+		for(Appointment appointment: appointments) {
+			if (appointment.getId().equals(id)) {
+				foundAppointment = appointment;
+				break;
+			}
+		}
+		
+		if (foundAppointment == null) {
+	        throw new IllegalArgumentException("Appointment with ID " + id + " not found.");
+	    }
+		
+		return new Appointment(foundAppointment);
+	}
+	
+}

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <nav class="sidebar" th:fragment="sidebar">
+        <ul>
+            <li><a th:href="@{/task}">Task</a></li>
+            <li><a th:href="@{/appointment}">Appointment</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,5 @@
+package com.cs499.organizer.model;
+
+public class AppointmentTest {
+
+}

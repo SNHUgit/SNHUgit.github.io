@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>APPOINTMENT_PAGE</title>
+	<!-- css code found in style.css -->	
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+	<!-- optional for tabs-->
+	<script th:src="@{/js/tabs.js}"></script>
+	<!-- Custom scripts per page-->
+	<script th:src="@{/js/appointment.js}"></script>
+</head>
+	<body>
+		<!-- header code found in header fragment-->
+    	<div th:replace="~{fragments/header :: header}"></div>
+    	<div class="container">
+		<!-- sidebar code found in sidebar fragment-->	
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        	<main class="content">
+				<!-- used to keep active tab active-->
+				<input type="hidden" id="activeTab" th:value="${activeTab}">
+			
+				<!--********************************************************-->
+				<!--Header Scripts & Sidebar should altered withen fragments-->
+				<!--********************************************************-->
+				
+				<!--Page Title-->
+				<h2>Appointment</h2>
+				
+				<!--*********************************************-->
+				<!--***************** Tab start *****************-->
+				<!--*********************************************-->
+				<!--If tabs are used in page-->
+				<div class="tab">
+					<button type="button" onclick="showTab('showAppointment')">Show Appointment</button>
+					<button type="button" onclick="showTab('addAppointment')">Add Appointment</button>
+					<button type="button" onclick="showTab('searchAppointment')">Search Appointment</button>
+				</div>
+				
+				<!-- Tab content addAppointment-->
+				<div id="addAppointment" class="tabcontent" style="display:none;">
+				  <h3>Add Appointment</h3>
+			      <form th:action="@{/appointment/add}" method="post">
+			  		
+			         	<label for="addAppointmentDescription">Description:</label><br>
+			         	<input type="text" id="addAppointmentDescription" name="addAppointmentDescription"><br><br>
+
+			          	<label for="addAppointmentDate">Appointment Date:</label><br>
+			          	<input type="text" id="addAppointmentDate" name="addAppointmentDate"><br><br>
+
+			          	<button type="submit">Add Appointment</button>
+			      	</form>
+			  	</div>
+				
+				<!-- Tab content ShowAppointment-->
+				
+				<div id="showAppointment" class="tabcontent">
+				    <h3>Show Appointments</h3>
+				    <table>
+				        <tr>
+				            <th>Description</th>
+				            <th>Appointment Date</th>
+							<th>Edit</th>
+							<th>Delete</th>
+				        </tr>
+				        <tr th:each="appointment : ${appointments}">
+				            <td th:text="${appointment.description}"></td>
+				            <td th:text="${appointment.appointmentDate}"></td>
+							<td>
+							    <button type="button"
+										th:attr="data-id=${appointment.id},data-description=${appointment.description},data-date=${appointment.appointmentDate}"
+							            onclick="EditAppointmentFromButton(this)">
+							            Edit
+							    </button>
+							</td>
+							<td>
+							    <form th:action="@{/appointment/delete}" method="post">
+							        <input type="hidden" name="id" th:value="${appointment.id}">
+							        <button type="submit">Delete</button>
+							    </form>
+							</td>
+						</tr>	
+				    </table>
+				</div>
+				
+				<!-- Tab content edit Appointment-->
+				
+				<div id="editAppointment" class="tabcontent" style="display:none;">
+				    <h3>Edit Appointment</h3>
+
+				    <form th:action="@{/appointment/edit}" method="post">
+				        <input type="hidden" id="editAppointmentId" name="id">
+
+				        <label for="editAppointmentDescription">Description:</label><br>
+				        <input type="text" id="editAppointmentDescription" name="editAppointmentDescription"><br><br>
+
+				        <label for="editAppointmentDate">Appointment Date:</label><br>
+				        <input type="text" id="editAppointmentDate" name="editAppointmentDate"><br><br>
+
+				        <button type="submit">Save</button>
+				    </form>
+				</div>
+				
+				<!-- Tab content search Appointment-->
+
+				<div id="searchAppointment" class="tabcontent" style="display:none;">
+				    <h3>Search Appointment</h3>
+
+					<form th:action="@{/appointment/search}" method="get">
+					    <label for="searchAppointmentInput">Search by description:</label><br>
+					    <input type="text" id="searchAppointmentInput" name="searchAppointment"><br><br>
+					    <button type="submit">Search</button>
+					</form>
+
+				    <h3>Search Results</h3>
+					<p th:if="${searchAppointmentValue != null}">
+					    You searched for: <span th:text="${searchAppointmentValue}"></span>
+					</p>
+				    <table>
+				        <tr>
+				            <th>Description</th>
+				            <th>Appointment Date</th>
+							<th>Edit</th>
+							<th>Delete</th>
+				        </tr>
+
+				        <tr th:each="appointment : ${appointmentSearchResults}">
+
+				            <td th:text="${appointment.description}"></td>
+				            <td th:text="${appointment.appointmentDate}"></td>
+							<td>
+							    <button type="button"
+										th:attr="data-id=${appointment.id},data-description=${appointment.description},data-date=${appointment.appointmentDate}"
+							            onclick="EditAppointmentFromButton(this)">
+							            Edit
+							    </button>
+							</td>
+							<td>
+							    <form th:action="@{/appointment/delete}" method="post">
+							        <input type="hidden" name="id" th:value="${appointment.id}">
+							        <button type="submit">Delete</button>
+							    </form>
+							</td>
+				        </tr>
+				    </table>
+				</div>
+
+				<!--*********************************************-->
+				<!--****************** Tab end ******************-->
+				<!--*********************************************-->
+				
+				<!--*********************************************-->
+				<!--Code below should be altered withen fragments-->
+				<!--*********************************************-->
+			</main>
+    	</div>
+		<!-- sidebar code found in footer fragment-->	
+		<div th:replace="~{fragments/footer :: footer}"></div>
+	</body>
+</html>
