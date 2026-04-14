@@ -1,8 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <body>
-    <header th:fragment="header" class="header">
-        <h1>Organizer</h1>
-    </header>
+	<header th:fragment="header" class="header">
+		<h1>Organizer</h1>
+		<div class="header-links">
+			<a th:href="@{/login}" class="header-button"
+				sec:authorize="isAnonymous()">Login</a>
+
+			<form th:action="@{/logout}" method="post"
+				sec:authorize="isAuthenticated()">
+				<button type="submit" class="header-button">Logoff</button>
+			</form>
+		</div>
+	</header>
 </body>
 </html>

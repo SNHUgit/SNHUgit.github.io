@@ -1,80 +1,109 @@
 package com.cs499.organizer.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cs499.organizer.IdGenerator;
-import com.cs499.organizer.model.Appointment;
+import com.cs499.organizer.entity.Appointment;
 import com.cs499.organizer.service.AppointmentService;
 
+import jakarta.validation.Valid;
+
 @Controller
+@RequestMapping("/appointment")
 public class AppointmentController {
 
-    private final AppointmentService appointmentService = new AppointmentService();
+    private final AppointmentService appointmentService;
+
+    public AppointmentController(AppointmentService appointmentService) {
+        this.appointmentService = appointmentService;
+    }
 
     // Initialize appointment page
-    @GetMapping("/appointment")
-    public String appointmentPage(Model model) {
-        model.addAttribute("appointments", appointmentService.getAllAppointment());
-        model.addAttribute("appointmentSearchResults", new ArrayList<Appointment>());
+    @GetMapping
+    public String appointmentPage(@RequestParam(required = false) String searchAppointment,
+            @RequestParam(required = false) String sort,
+            Model model) {
+
+        loadAppointmentPageModel(model, searchAppointment, sort, "showAppointment");
         return "appointment";
     }
 
-    // Adds new Appointment
-    @PostMapping("/appointment/add")
-    public String addAppointment(@RequestParam String addAppointmentDescription,
-                                 @RequestParam String addAppointmentDate,
-                                 Model model) {
+    // Add Appointment
+    @PostMapping("/add")
+    public String addAppointment(@Valid @ModelAttribute("newAppointment") Appointment newAppointment,
+            BindingResult bindingResult,
+            Model model) {
 
-        // Creates and adds new appointment
-        Appointment newAppointment = new Appointment(
-                IdGenerator.getNewAppointmentId(appointmentService.getAllAppointment()),
-                addAppointmentDescription,
-                addAppointmentDate);
+        if (bindingResult.hasErrors()) {
+            loadAppointmentPageModel(model, null, "asc", "addAppointment");
+            return "appointment";
+        }
 
-        appointmentService.add(newAppointment);
-
-        // Updates appointment list
-        model.addAttribute("appointments", appointmentService.getAllAppointment());
-        model.addAttribute("appointmentSearchResults", new ArrayList<Appointment>());
-        return "appointment";
+        appointmentService.save(newAppointment);
+        return "redirect:/appointment";
     }
 
     // Edit Appointment
-    @PostMapping("/appointment/edit")
-    public String updateAppointment(@RequestParam String id,
-                                    @RequestParam String editAppointmentDescription,
-                                    @RequestParam String editAppointmentDate) {
+    @PostMapping("/edit")
+    public String updateAppointment(@RequestParam int id,
+            @Valid @ModelAttribute("editAppointment") Appointment editAppointment,
+            BindingResult bindingResult,
+            Model model) {
 
-        // Updates Appointment Service
-        appointmentService.updateAppointment(id, editAppointmentDescription, editAppointmentDate);
+        if (bindingResult.hasErrors()) {
+            loadAppointmentPageModel(model, null, "asc", "editAppointment");
+            return "appointment";
+        }
+
+        Appointment appointment = appointmentService.findById(id);
+        appointment.setDescription(editAppointment.getDescription());
+        appointment.setDate(editAppointment.getDate());
+        appointmentService.save(appointment);
+
         return "redirect:/appointment";
     }
 
     // Delete Appointment
-    @PostMapping("/appointment/delete")
-    public String deleteAppointment(@RequestParam String id) {
-        appointmentService.delete(id);
+    @PostMapping("/delete")
+    public String deleteAppointment(@RequestParam int id) {
+        appointmentService.deleteById(id);
         return "redirect:/appointment";
     }
 
-    // Search Appointment
-    @GetMapping("/appointment/search")
-    public String searchAppointment(@RequestParam String searchAppointment, Model model) {
-        // Refresh appointment list
-        model.addAttribute("appointments", appointmentService.getAllAppointment());
+    // Loads common model data needed for the appointment page
+    private void loadAppointmentPageModel(Model model, String searchAppointment, String sort, String activeTab) {
 
-        model.addAttribute("appointmentSearchResults",
-                appointmentService.descriptionSearch(searchAppointment));
+        if (sort == null || sort.isBlank()) {
+            sort = "asc";
+        }
+
+        List<Appointment> appointments;
+
+        if (searchAppointment != null && !searchAppointment.isBlank()) {
+            appointments = appointmentService.searchAndSortByDescription(searchAppointment, sort);
+        } else {
+            appointments = appointmentService.findAllSorted(sort);
+        }
+
+        model.addAttribute("appointments", appointments);
         model.addAttribute("searchAppointmentValue", searchAppointment);
+        model.addAttribute("sort", sort);
+        model.addAttribute("activeTab", activeTab);
 
-        // Stay in current tab
-        model.addAttribute("activeTab", "searchAppointment");
-        return "appointment";
+        if (!model.containsAttribute("newAppointment")) {
+            model.addAttribute("newAppointment", new Appointment());
+        }
+
+        if (!model.containsAttribute("editAppointment")) {
+            model.addAttribute("editAppointment", new Appointment());
+        }
     }
 }

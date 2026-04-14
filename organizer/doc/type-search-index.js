@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.cs499.organizer.controller","l":"TaskController"}];updateSearchResults();

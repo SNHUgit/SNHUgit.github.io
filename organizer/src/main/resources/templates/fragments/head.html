@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(pageTitle, pageScript)">
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Page Title</title>
+
+    <!-- Main site CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <!-- Shared tab script -->
+    <script th:src="@{/js/tabs.js}"></script>
+
+    <!-- Optional page specific script -->
+    <th:block th:if="${pageScript != null}">
+        <script th:src="@{${pageScript}}"></script>
+    </th:block>
+</head>
+</html>

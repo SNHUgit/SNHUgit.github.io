@@ -1,130 +1,18 @@
 package com.cs499.organizer.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.cs499.organizer.model.Contact;
+import com.cs499.organizer.entity.Contact;
 
-public class ContactService {
-
-	private List<Contact> contacts;
-
-	public ContactService() {
-		contacts = new ArrayList<>();
-	}
-
-	// Add Contact
-	public void add(Contact newContact) {
-
-		boolean isDuplicate = false;
-
-		for (Contact contact : contacts) {
-			if (contact.getId().equals(newContact.getId())) {
-				isDuplicate = true;
-				break;
-			}
-		}
-
-		if (isDuplicate) {
-			throw new IllegalArgumentException("Cannot add contact with duplicate id: " + newContact.getId());
-		}
-
-		contacts.add(newContact);
-
-	}
-
-	// Delete Contact
-	public void delete(String id) {
-		for (int i = 0; i < contacts.size(); i++) {
-			if (contacts.get(i).getId().equals(id)) {
-				contacts.remove(i);
-				return;
-			}
-		}
-	}
-
-	// Get Contact
-	public Contact get(String id) {
-
-		Contact foundContact = null;
-
-		for (Contact contact : contacts) {
-			if (contact.getId().equals(id)) {
-				foundContact = contact;
-				break;
-			}
-		}
-
-		if (foundContact == null) {
-			throw new IllegalArgumentException("Contact with ID " + id + " not found.");
-		}
-
-		return new Contact(foundContact);
-
-	}
-
-	// Update First Name
-	public void updateFirstName(String id, String firstName) {
-		for (Contact contact : contacts) {
-			if (contact.getId().equals(id)) {
-				contact.setFirstName(firstName);
-				return;
-			}
-		}
-
-	}
-
-	// Update Last Name
-	public void updateLastName(String id, String LastName) {
-		for (Contact contact : contacts) {
-			if (contact.getId().equals(id)) {
-				contact.setLastName(LastName);
-				return;
-			}
-		}
-	}
-
-	// Update Address
-	public void updateAddress(String id, String address) {
-		for (Contact contact : contacts) {
-			if (contact.getId().equals(id)) {
-				contact.setAddress(address);
-				return;
-			}
-		}
-
-	}
-
-	// Update Number
-	public void updateNumber(String id, String number) {
-		for (Contact contact : contacts) {
-			if (contact.getId().equals(id)) {
-				contact.setNumber(number);
-				return;
-			}
-		}
-	}
-
-	// Search first and last name
-	public List<Contact> nameSearch(String name) {
-		List<Contact> foundContacts = new ArrayList<>();
-		for (Contact contact : contacts) {
-			if (contact.getFirstName().toLowerCase().contains(name.toLowerCase())
-					|| contact.getLastName().toLowerCase().contains(name.toLowerCase())) {
-				foundContacts.add(new Contact(contact));
-			}
-		}
-		return foundContacts;
-	}
-
-	// Get all contacts
-	public List<Contact> getAllContact() {
-	    	// make a copy of the list and returns the copy
-		List<Contact> contactCopy = new ArrayList<>();
-		for (Contact contact : contacts) {
-			contactCopy.add(new Contact(contact));
-		}
-		return contactCopy;
-	}
-
+public interface ContactService {
+    List<Contact> findAll();
+    Contact findById(int id);
+    Contact save(Contact contact);
+    void deleteById(int id);
+    List<Contact> findByFirstNameContaining(String firstName);
+    List<Contact> findByLastNameContaining(String lastName);
+    List<Contact> findByAddressContaining(String address);
+    List<Contact> findByNumberContaining(String number);
+    List<Contact> findAllSorted(String sort);
+    List<Contact> searchAndSortByName(String searchContact, String sort);    
 }

@@ -1,89 +1,111 @@
 package com.cs499.organizer.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cs499.organizer.IdGenerator;
-import com.cs499.organizer.model.Contact;
+import com.cs499.organizer.entity.Contact;
 import com.cs499.organizer.service.ContactService;
 
+import jakarta.validation.Valid;
+
 @Controller
+@RequestMapping("/contact")
 public class ContactController {
 
-    private final ContactService contactService = new ContactService();
+    private final ContactService contactService;
+
+    public ContactController(ContactService contactService) {
+        this.contactService = contactService;
+    }
 
     // Initialize contact page
-    @GetMapping("/contact")
-    public String contactPage(Model model) {
-        model.addAttribute("contacts", contactService.getAllContact());
-        model.addAttribute("contactSearchResults", new ArrayList<Contact>());
+    @GetMapping
+    public String contactPage(@RequestParam(required = false) String searchContact,
+            @RequestParam(required = false) String sort,
+            Model model) {
+
+        loadContactPageModel(model, searchContact, sort, "showContact");
         return "contact";
     }
 
-    // Adds new Contact
-    @PostMapping("/contact/add")
-    public String addContact(@RequestParam String addContactFirstName,
-                             @RequestParam String addContactLastName,
-                             @RequestParam String addContactNumber,
-                             @RequestParam String addContactAddress,
-                             Model model) {
+    // Add Contact
+    @PostMapping("/add")
+    public String addContact(@Valid @ModelAttribute("newContact") Contact newContact,
+            BindingResult bindingResult,
+            Model model) {
 
-        // Creates and adds new contact
-        Contact newContact = new Contact(
-                addContactFirstName,
-                addContactLastName,
-                addContactNumber,
-                addContactAddress,
-                IdGenerator.getNewContactId(contactService.getAllContact()));
+        if (bindingResult.hasErrors()) {
+            loadContactPageModel(model, null, "asc", "addContact");
+            return "contact";
+        }
 
-        contactService.add(newContact);
-
-        // Updates contact list
-        model.addAttribute("contacts", contactService.getAllContact());
-        model.addAttribute("contactSearchResults", new ArrayList<Contact>());
-        return "contact";
+        contactService.save(newContact);
+        return "redirect:/contact";
     }
 
     // Edit Contact
-    @PostMapping("/contact/edit")
-    public String updateContact(@RequestParam String id,
-                                @RequestParam String editContactFirstName,
-                                @RequestParam String editContactLastName,
-                                @RequestParam String editContactNumber,
-                                @RequestParam String editContactAddress) {
+    @PostMapping("/edit")
+    public String updateContact(@RequestParam int id,
+            @Valid @ModelAttribute("editContact") Contact editContact,
+            BindingResult bindingResult,
+            Model model) {
 
-        // Updates Contact Service
-        contactService.updateFirstName(id, editContactFirstName);
-        contactService.updateLastName(id, editContactLastName);
-        contactService.updateNumber(id, editContactNumber);
-        contactService.updateAddress(id, editContactAddress);
+        if (bindingResult.hasErrors()) {
+            loadContactPageModel(model, null, "asc", "editContact");
+            return "contact";
+        }
+
+        Contact contact = contactService.findById(id);
+        contact.setFirstName(editContact.getFirstName());
+        contact.setLastName(editContact.getLastName());
+        contact.setNumber(editContact.getNumber());
+        contact.setAddress(editContact.getAddress());
+        contactService.save(contact);
 
         return "redirect:/contact";
     }
 
     // Delete Contact
-    @PostMapping("/contact/delete")
-    public String deleteContact(@RequestParam String id) {
-        contactService.delete(id);
+    @PostMapping("/delete")
+    public String deleteContact(@RequestParam int id) {
+        contactService.deleteById(id);
         return "redirect:/contact";
     }
 
-    // Search Contact
-    @GetMapping("/contact/search")
-    public String searchContact(@RequestParam String searchContact, Model model) {
-        // Refresh contact list, on show contact page
-        model.addAttribute("contacts", contactService.getAllContact());
+    // Loads common model data needed for the contact page
+    private void loadContactPageModel(Model model, String searchContact, String sort, String activeTab) {
 
-        model.addAttribute("contactSearchResults", contactService.nameSearch(searchContact));
+        if (sort == null || sort.isBlank()) {
+            sort = "asc";
+        }
+
+        List<Contact> contacts;
+
+        if (searchContact != null && !searchContact.isBlank()) {
+            contacts = contactService.searchAndSortByName(searchContact, sort);
+        } else {
+            contacts = contactService.findAllSorted(sort);
+        }
+
+        model.addAttribute("contacts", contacts);
         model.addAttribute("searchContactValue", searchContact);
+        model.addAttribute("sort", sort);
+        model.addAttribute("activeTab", activeTab);
 
-        // Stay in current tab
-        model.addAttribute("activeTab", "searchContact");
-        return "contact";
+        if (!model.containsAttribute("newContact")) {
+            model.addAttribute("newContact", new Contact());
+        }
+
+        if (!model.containsAttribute("editContact")) {
+            model.addAttribute("editContact", new Contact());
+        }
     }
 }

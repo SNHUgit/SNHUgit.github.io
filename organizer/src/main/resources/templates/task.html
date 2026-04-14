@@ -1,159 +1,128 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>TEMPLATE_PAGE</title>
-	<!-- css code found in style.css -->	
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-	<!-- optional for tabs-->
-	<script th:src="@{/js/tabs.js}"></script>
-	<!-- Custom scripts per page-->
-	<script th:src="@{/js/task.js}"></script>
-</head>
-	<body>
-		<!-- header code found in header fragment-->
-    	<div th:replace="~{fragments/header :: header}"></div>
-    	<div class="container">
-		<!-- sidebar code found in sidebar fragment-->	
-        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
-        	<main class="content">
-				<!-- used to keep active tab active-->
-				<input type="hidden" id="activeTab" th:value="${activeTab}">
-			
-				<!--********************************************************-->
-				<!--Header Scripts & Sidebar should altered withen fragments-->
-				<!--********************************************************-->
-				
-				<!--Page Title-->
-				<h2>Task</h2>
-				
-				<!--*********************************************-->
-				<!--***************** Tab start *****************-->
-				<!--*********************************************-->
-				<!--If tabs are used in page-->
-				<div class="tab">
-					<button type="button" onclick="showTab('showTask')">Show Task</button>
-					<button type="button" onclick="showTab('addTask')">Add Task</button>
-					<button type="button" onclick="showTab('searchTask')">Search Task</button>
-				</div>
-				<!-- Tab content addTask-->
-				<div id="addTask" class="tabcontent" style="display:none;">
-				  <h3>Add Task</h3>
-			      <form th:action="@{/task/add}" method="post">
-			  		
-			         	<label for="addTaskName">Task Name:</label><br>
-			         	<input type="text" id="addTaskName" name="addTaskName"><br><br>
 
-			          	<label for="addTaskDescription">Description:</label><br>
-			          	<input type="text" id="addTaskDescription" name="addTaskDescription"><br><br>
+<head th:replace="~{fragments/head :: head('Task', '/js/task.js')}"></head>
 
-			          	<button type="submit">Add Task</button>
-			      	</form>
-			  	</div>
-				
-				<!-- Tab content ShowTask-->
-				
-				<div id="showTask" class="tabcontent">
-				    <h3>Show Tasks</h3>
-				    <table>
-				        <tr>
-				            <th>Task Name</th>
-				            <th>Description</th>
-							<th>Edit</th>
-							<th>Delete</th>
-				        </tr>
-				        <tr th:each="task : ${tasks}">
-				            <td th:text="${task.name}"></td>
-				            <td th:text="${task.description}"></td>
-							<td>
-							    <button type="button"
-										th:attr="data-id=${task.id},data-name=${task.name},data-description=${task.description}"
-							            onclick="EditTaskFromButton(this)">
-							            Edit
-							    </button>
-							</td>
-							<td>
-							    <form th:action="@{/task/delete}" method="post">
-							        <input type="hidden" name="id" th:value="${task.id}">
-							        <button type="submit">Delete</button>
-							    </form>
-							</td>
-						</tr>	
-				    </table>
-				</div>
-				
-				<!-- Tab content edit Task-->
-				
-				<div id="editTask" class="tabcontent" style="display:none;">
-				    <h3>Edit Task</h3>
+<body>
+	<div th:replace="~{fragments/header :: header}"></div>
 
-				    <form th:action="@{/task/edit}" method="post">
-				        <input type="hidden" id="editTaskId" name="id">
+	<div class="container">
+		<div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-				        <label for="editTaskName">Task Name:</label><br>
-				        <input type="text" id="editTaskName" name="editTaskName"><br><br>
+		<!--********************************************************-->
+		<!---Header Head & Sidebar should altered withen fragments---->
+		<!--********************************************************-->
 
-				        <label for="editTaskDescription">Description:</label><br>
-				        <input type="text" id="editTaskDescription" name="editTaskDescription"><br><br>
+		<main class="content">
+			<input type="hidden" id="activeTab" th:value="${activeTab}">
 
-				        <button type="submit">Save</button>
-				    </form>
-				</div>
-				
-				<!-- Tab content search task-->
+			<!--Page Title-->
+			<h2>Task</h2>
 
-				<div id="searchTask" class="tabcontent" style="display:none;">
-				    <h3>Search Task</h3>
+			<!--*********************************************-->
+			<!--***************** Tab start *****************-->
+			<!--*********************************************-->
 
-					<form th:action="@{/task/search}" method="get">
-					    <label for="searchTaskInput">Search by name:</label><br>
-					    <input type="text" id="searchTaskInput" name="searchTask"><br><br>
-					    <button type="submit">Search</button>
-					</form>
+			<div class="tab">
+				<button type="button" onclick="showTab('showTask')">Task
+					List</button>
+				<button type="button" onclick="showTab('addTask')">Add Task</button>
+			</div>
 
-				    <h3>Search Results</h3>
-					<p th:if="${searchTaskValue != null}">
-					    You searched for: <span th:text="${searchTaskValue}"></span>
-					</p>
-				    <table>
-				        <tr>
-				            <th>Task Name</th>
-				            <th>Description</th>
-							<th>Edit</th>
-							<th>Delete</th>
-				        </tr>
+			<!-- Tab content ShowTask-->
+			<div id="showTask" class="tabcontent">
 
-				        <tr th:each="task : ${taskSearchResults}">
+				<h3>Task List</h3>
 
-				            <td th:text="${task.name}"></td>
-				            <td th:text="${task.description}"></td>
-							<td>
-							    <button type="button"
-										th:attr="data-id=${task.id},data-name=${task.name},data-description=${task.description}"
-							            onclick="EditTaskFromButton(this)">
-							            Edit
-							    </button>
-							</td>
-							<td>
-							    <form th:action="@{/task/delete}" method="post">
-							        <input type="hidden" name="id" th:value="${task.id}">
-							        <button type="submit">Delete</button>
-							    </form>
-							</td>
-				        </tr>
-				    </table>
-				</div>
+				<form th:action="@{/task}" method="get">
+					<label for="searchTaskInput">Search by name:</label> <input
+						type="text" id="searchTaskInput" name="searchTask"
+						th:value="${searchTaskValue}"> <label for="sort">Sort
+						by name:</label> <select id="sort" name="sort">
+						<option value="asc" th:selected="${sort == 'asc'}">A to Z</option>
+						<option value="desc" th:selected="${sort == 'desc'}">Z to
+							A</option>
+					</select>
 
-				<!--*********************************************-->
-				<!--****************** Tab end ******************-->
-				<!--*********************************************-->
-				
-				<!--*********************************************-->
-				<!--Code below should be altered withen fragments-->.
-				<!--*********************************************-->
-			</main>
-    	</div>
-		<!-- sidebar code found in footer fragment-->	
-		<div th:replace="~{fragments/footer :: footer}"></div>
-	</body>
+					<button type="submit">Apply</button>
+				</form>
+
+				<table>
+					<tr>
+						<th>Task Name</th>
+						<th>Description</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+					<tr th:each="task : ${tasks}">
+						<td th:text="${task.name}"></td>
+						<td th:text="${task.description}"></td>
+						<td>
+							<button type="button"
+								th:attr="data-id=${task.id},data-name=${task.name},data-description=${task.description}"
+								onclick="EditTaskFromButton(this)">Edit</button>
+						</td>
+						<td>
+							<form th:action="@{/task/delete}" method="post">
+								<input type="hidden" name="id" th:value="${task.id}">
+								<button type="submit">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- Tab content addTask-->
+			<div id="addTask" class="tabcontent" style="display: none;">
+				<h3>Add Task</h3>
+				<form th:action="@{/task/addTask}" th:object="${newTask}"
+					method="post">
+					<label for="addTaskName">Task Name:</label><br> <input
+						type="text" id="addTaskName" th:field="*{name}"><br>
+					<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+					<br> <label for="addTaskDescription">Description:</label><br>
+					<textarea id="addTaskDescription" th:field="*{description}"></textarea>
+					<br>
+					<div th:if="${#fields.hasErrors('description')}"
+						th:errors="*{description}"></div>
+					<br>
+
+					<button type="submit">Save Task</button>
+				</form>
+			</div>
+
+			<!-- Tab content edit Task-->
+			<div id="editTask" class="tabcontent" style="display: none;">
+				<h3>Edit Task</h3>
+				<form th:action="@{/task/edit}" th:object="${editTask}"
+					method="post">
+					<input type="hidden" id="editTaskId" th:field="*{id}"><label
+						for="editTaskName">Task Name:</label><br>
+					<input type="text"id="editTaskName" th:field="*{name}"><br>
+					<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+					<br> <label for="editTaskDescription">Description:</label><br>
+					<textarea id="editTaskDescription" th:field="*{description}"></textarea>
+					<br>
+					<div th:if="${#fields.hasErrors('description')}"
+						th:errors="*{description}"></div>
+					<br>
+
+					<button type="submit">Save</button>
+				</form>
+			</div>
+
+			<!--*********************************************-->
+			<!--****************** Tab end ******************-->
+			<!--*********************************************-->
+
+			<!--*********************************************-->
+			<!--Code below should be altered withen fragments-->
+			.
+			<!--*********************************************-->
+		</main>
+	</div>
+
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+
 </html>

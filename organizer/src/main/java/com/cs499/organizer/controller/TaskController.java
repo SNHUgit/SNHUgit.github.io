@@ -1,77 +1,109 @@
 package com.cs499.organizer.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cs499.organizer.model.Task;
+import com.cs499.organizer.entity.Task;
 import com.cs499.organizer.service.TaskService;
-import com.cs499.organizer.IdGenerator;
+
+import jakarta.validation.Valid;
 
 @Controller
+@RequestMapping("/task")
 public class TaskController {
 
-    private final TaskService taskService = new TaskService();
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     // Initialize task page
-    @GetMapping("/task")
-    public String taskPage(Model model) {
-        model.addAttribute("tasks", taskService.getAllTask());
-        model.addAttribute("taskSearchResults", new ArrayList<Task>());
+    @GetMapping
+    public String taskPage(@RequestParam(required = false) String searchTask,
+            @RequestParam(required = false) String sort,
+            Model model) {
+
+        loadTaskPageModel(model, searchTask, sort, "showTask");
         return "task";
     }
 
-    // Adds new Task
-    @PostMapping("/task/add")
-    public String addTask(@RequestParam String addTaskName,
-                          @RequestParam String addTaskDescription,
-                          Model model) {
+    // Add Task
+    @PostMapping("/addTask")
+    public String addTask(@Valid @ModelAttribute("newTask") Task newTask,
+            BindingResult bindingResult,
+            Model model) {
 
-    	// Creates and adds new service
-        Task newTask = new Task(IdGenerator.getNewTaskId(taskService.getAllTask()), addTaskName, addTaskDescription);
-        taskService.add(newTask);
+        if (bindingResult.hasErrors()) {
+            loadTaskPageModel(model, null, "asc", "addTask");
+            return "task";
+        }
 
-        // Updates task list
-        model.addAttribute("tasks", taskService.getAllTask());
-        model.addAttribute("taskSearchResults", new ArrayList<Task>());
-        return "task";
+        taskService.save(newTask);
+        return "redirect:/task";
     }
-    
+
     // Edit Task
-    @PostMapping("/task/edit")
-    public String updateTask(@RequestParam String id,
-                             @RequestParam String editTaskName,
-                             @RequestParam String editTaskDescription) {
-    	
-    	// Updates Task Service
-        taskService.updateName(id, editTaskName);
-        taskService.updateDescription(id, editTaskDescription);
-        return "redirect:/task";
-    }
-    
-    // Delete Task
-    @PostMapping("/task/delete")
-    public String deleteTask(@RequestParam String id) {
-        taskService.delete(id);
+    @PostMapping("/edit")
+    public String updateTask(@RequestParam int id,
+            @Valid @ModelAttribute("editTask") Task editTask,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            loadTaskPageModel(model, null, "asc", "editTask");
+            return "task";
+        }
+
+        Task task = taskService.findById(id);
+        task.setName(editTask.getName());
+        task.setDescription(editTask.getDescription());
+        taskService.save(task);
+
         return "redirect:/task";
     }
 
-    // Search Task
-    @GetMapping("/task/search")
-    public String searchTask(@RequestParam String searchTask, Model model) {
-    	// Refresh task list, on show task page. Was disappearing after a search until it was added.
-    	model.addAttribute("tasks", taskService.getAllTask());
-    	
-        model.addAttribute("taskSearchResults", taskService.nameSearch(searchTask));
-        model.addAttribute("searchTaskValue", searchTask);
-        
-        // Stay in current tab
-        model.addAttribute("activeTab", "searchTask");
-        return "task";
+    // Delete Task
+    @PostMapping("/delete")
+    public String deleteTask(@RequestParam int id) {
+        taskService.deleteById(id);
+        return "redirect:/task";
     }
-    
+
+    // Loads common model data needed for the task page
+    private void loadTaskPageModel(Model model, String searchTask, String sort, String activeTab) {
+
+        if (sort == null || sort.isBlank()) {
+            sort = "asc";
+        }
+
+        List<Task> tasks;
+
+        if (searchTask != null && !searchTask.isBlank()) {
+            tasks = taskService.searchAndSortByName(searchTask, sort);
+        } else {
+            tasks = taskService.findAllSorted(sort);
+        }
+
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("searchTaskValue", searchTask);
+        model.addAttribute("sort", sort);
+        model.addAttribute("activeTab", activeTab);
+
+        if (!model.containsAttribute("newTask")) {
+            model.addAttribute("newTask", new Task());
+        }
+
+        if (!model.containsAttribute("editTask")) {
+            model.addAttribute("editTask", new Task());
+        }
+    }
 }

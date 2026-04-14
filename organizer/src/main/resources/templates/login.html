@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<!-- css code found in style.css -->
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<!-- header code found in header fragment-->
+	<div th:replace="~{fragments/header :: header}"></div>
+	<div class="container">
+		<!-- sidebar code found in sidebar fragment-->
+		<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+		<main class="content">
+
+			<!--********************************************************-->
+			<!--Header Scripts & Sidebar should altered withen fragments-->
+			<!--********************************************************-->
+
+			<!--Page Title-->
+			<h2>Login</h2>
+
+			<form th:action="@{/authentication}" method="POST">
+
+				<div th:if="${param.error}">Invalid username and password.</div>
+				<div th:if="${param.logout}">You have been logged out.</div>
+
+				<div>
+					<input type="text" name="username" placeholder="username">
+				</div>
+
+				<div>
+					<input type="password" name="password" placeholder="password">
+				</div>
+
+				<div>
+					<button type="submit">Login</button>
+				</div>
+
+			</form>
+			<!--*********************************************-->
+			<!--Code below should be altered within fragments-->
+			.
+			<!--*********************************************-->
+		</main>
+	</div>
+	<!-- sidebar code found in footer fragment-->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
