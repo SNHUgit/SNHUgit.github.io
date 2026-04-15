@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="FIRST OR"/>
+			<item value="appointmentDa"/>
+			<item value="appointment.appointment"/>
+			<item value="appointmentDate"/>
+			<item value="editAppointmentDate"/>
+			<item value="addAppointmentDate"/>
+			<item value="addAppointment"/>
+			<item value="this.appointment"/>
+			<item value="textarea"/>
+			<item value="appointments"/>
+			<item value="date"/>
+			<item value="class"/>
+			<item value="task"/>
+			<item value="contract"/>
+			<item value="Task"/>
+		</list>
+	</section>
+</section>

@@ -1,2 +1,36 @@
+# Eclipse
 .metadata/
+.classpath
+.project
+.settings/
+.loadpath
+.recommenders/
+
+# SonarLint
 .sonarlint/
+
+# Build output
+target/
+bin/
+build/
+out/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IntelliJ / VS Code if you ever open the project there
+.idea/
+.vscode/
+*.iml
+
+# Env / secrets
+.env
+.env.*
+application-local.properties
+application-local.yml
+secrets.properties
+secrets.yml
