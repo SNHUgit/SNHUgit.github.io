@@ -29,6 +29,8 @@ I chose this artifact because I wanted to take the core idea of the original pro
 
 ![Login](images/login.png)
 
+- **Centralized Error Handling:** I added centralized exception handling so the application could respond to problems in a cleaner and more consistent way.
+
 ## Enhancement One: Software Design and Engineering
 
 For the software design and engineering enhancement, I reworked the original backend only project into a Spring Boot web application with controllers, Thymeleaf pages, reusable fragments, JavaScript for tab behavior, and centralized exception handling. I wanted to use this enhancement because it showed that I could take the original project idea and rebuild it into something more complete, more professional, and much easier for a person to actually interact with.
