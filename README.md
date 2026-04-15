@@ -6,9 +6,11 @@ This artifact was originally created in CS 320, Software Testing, Automation, an
 
 I chose this artifact because I wanted to take the core idea of the original project and turn it into one larger and more realistic application across all three enhancement categories. Even though the enhanced version was reworked to fit Spring Boot and was not just the original code copied forward, the original artifact still gave me the starting point for the data model, project purpose, and overall direction.
 
+
 ## Features Added
 
 - **Web GUI:** I built a web based interface so the enhanced application could be used through a browser instead of only existing as backend classes with no real user interaction.
+![Home page of organizer app](images/app-home.png)
 
 - **PostgreSQL Database Persistence:** I moved the application from temporary in memory storage to PostgreSQL so contacts, tasks, and appointments would persist and the project would feel more like a real system.
 
@@ -24,16 +26,19 @@ I chose this artifact because I wanted to take the core idea of the original pro
 
 For the software design and engineering enhancement, I reworked the original backend only project into a Spring Boot web application with controllers, Thymeleaf pages, reusable fragments, JavaScript for tab behavior, and centralized exception handling. I wanted to use this enhancement because it showed that I could take the original project idea and rebuild it into something more complete, more professional, and much easier for a person to actually interact with.
 
-- [Enhancement One](Enhancement and Assessment Docs/enhancement-1.docx)
+[Enhancement One Journal](Enhancement and Assessment Docs/enhancement-1.docx)
 
 ## Enhancement Two: Algorithms and Data Structures
 
 For the algorithms and data structures enhancement, I added search and sorting features for contacts, tasks, and appointments. I wanted to use this enhancement because it gave me a way to show algorithmic thinking, time complexity, and trade offs without pretending the goal was just to make everything magically faster. The bigger improvement was making the project more organized and better prepared for cleaner retrieval as it grew.
 
+[Enhancement Two Journal](Enhancement and Assessment Docs/enhancement-2.docx)
 
 ## Enhancement Three: Databases
 
 For the database enhancement, I moved the project from temporary in memory storage to PostgreSQL so the data would persist, and I also added user authorization. I wanted to use this enhancement because it made the application feel much more realistic and gave me a way to show database integration, persistence, CRUD work, and a stronger focus on controlling access to stored data.
+
+[Enhancement Three Journal](Enhancement and Assessment Docs/enhancement-2.docx)
 
 ## Course Outcome One
 
@@ -54,3 +59,5 @@ This project supports the use of well founded and practical computing tools by u
 ## Course Outcome Five
 
 This project supports a security mindset through validation, cleaner error handling, database use, and user authorization. As the application became more realistic, security became more important, especially when dealing with stored data, user input, and controlling access to different parts of the system.
+
+
