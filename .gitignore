@@ -1,36 +1,71 @@
-# Eclipse
-.metadata/
-.classpath
-.project
-.settings/
-.loadpath
-.recommenders/
+HELP.md
 
-# SonarLint
+# Root Eclipse / tooling
+.metadata/
 .sonarlint/
 
 # Build output
-target/
-bin/
-build/
-out/
+organizer/target/
+organizer/build/
+organizer/out/
+
+# Maven wrapper jar should stay tracked
+!organizer/.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+organizer/.classpath
+organizer/.project
+organizer/.factorypath
+organizer/.settings/
+organizer/.idea/
+organizer/*.iws
+organizer/*.iml
+organizer/*.ipr
+organizer/.vscode/
+organizer/.sts4-cache
+organizer/.springBeans
+organizer/.apt_generated
+
+# NetBeans
+organizer/nbproject/private/
+organizer/nbbuild/
+organizer/dist/
+organizer/nbdist/
+organizer/.nb-gradle/
+
+# DBeaver
+organizer/.dbeaver/
+
+# Generated documentation
+organizer/doc/
 
 # Logs
-*.log
+organizer/*.log
+organizer/logs/
 
-# OS junk
+# OS files
 .DS_Store
 Thumbs.db
 
-# IntelliJ / VS Code if you ever open the project there
-.idea/
-.vscode/
-*.iml
+# Environment and secrets
+organizer/.env
+organizer/.env.*
+organizer/*.secret
+organizer/secrets.properties
+organizer/application-local.properties
+organizer/application-local.yml
+organizer/application-dev.properties
+organizer/application-dev.yml
+organizer/application-secrets.properties
+organizer/application-secrets.yml
 
-# Env / secrets
-.env
-.env.*
-application-local.properties
-application-local.yml
-secrets.properties
-secrets.yml
+# Java packaged artifacts
+organizer/*.class
+organizer/*.jar
+organizer/*.war
+organizer/*.ear
+
+# Temporary files
+organizer/*.tmp
+organizer/*.swp
+organizer/*~
