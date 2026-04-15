@@ -17,7 +17,7 @@ I chose this artifact because I wanted to take the core idea of the original pro
 
 - **Data Validation:** I carried validation into the enhanced application so user input could be checked more carefully before being stored or processed.
 
-![Data Validation](docs/images/dataValidation.png)
+![Data Validation](images/dataValidation.png)
 
 - **Sorting:** I added sorting features to make the data easier to organize and use, including alphabetical sorting for tasks and contacts and date based sorting for appointments.
 
@@ -47,7 +47,7 @@ For the algorithms and data structures enhancement, I added search and sorting f
 
 For the database enhancement, I moved the project from temporary in memory storage to PostgreSQL so the data would persist, and I also added user authorization. I wanted to use this enhancement because it made the application feel much more realistic and gave me a way to show database integration, persistence, CRUD work, and a stronger focus on controlling access to stored data.
 
-[Enhancement Three Journal](docs/files/enhancement-2.docx)
+[Enhancement Three Journal](docs/files/enhancement-3.docx)
 
 ## Course Outcome One
 
