@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.cs499.organizer.service.TaskService"/>
-    <fullyQualifiedTypeName name="com.cs499.organizer.IdGenerator"/>
-    <fullyQualifiedTypeName name="com.cs499.organizer.model.Task"/>
-    <fullyQualifiedTypeName name="com.cs499.organizer.entity.Task"/>
-</qualifiedTypeNameHistroy>
