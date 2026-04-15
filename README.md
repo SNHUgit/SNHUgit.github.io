@@ -10,17 +10,21 @@ I chose this artifact because I wanted to take the core idea of the original pro
 ## Features Added
 
 - **Web GUI:** I built a web based interface so the enhanced application could be used through a browser instead of only existing as backend classes with no real user interaction.
-![Home page of organizer app](images/app-home.png)
+![Gui](images/gui.png)
 
 - **PostgreSQL Database Persistence:** I moved the application from temporary in memory storage to PostgreSQL so contacts, tasks, and appointments would persist and the project would feel more like a real system.
 
 - **Data Validation:** I carried validation into the enhanced application so user input could be checked more carefully before being stored or processed.
+![Data Validation](images/dataValidation.png)
 
 - **Sorting:** I added sorting features to make the data easier to organize and use, including alphabetical sorting for tasks and contacts and date based sorting for appointments.
 
 - **Searching:** I added search features for contacts, tasks, and appointments so records could be found more easily and used in a more organized way.
+![Gui](images/SortSearch.png)
 
 - **User Authorization:** I added user authorization to make the application more realistic by controlling access instead of allowing every user to reach everything.
+Data Validation
+![Login](images/login.png)
 
 ## Enhancement One: Software Design and Engineering
 
