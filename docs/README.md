@@ -22,11 +22,9 @@
 
 ## Professional Self Assessment
 
-My time in the Computer Science program helped me turn a long interest in programming into something a lot more real and structured. I have been hobby programming for around 20 years, but for most of that time my code was honestly spaghetti code. I could make things work sometimes, but eventually I would always run into an error or design problem that I did not really understand how to solve. This portfolio shows how that changed by taking one original artifact and rebuilding it into a more complete full stack application across software engineering, algorithms and data structures, and databases.
+My time in the Computer Science program helped me turn a long interest in programming into something a lot more real and structured. I have been hobby programming for around 20 years, but for most of that time my code was honestly spaghetti code, and I would eventually run into errors or design problems I did not really understand how to solve. This program helped me build a much stronger foundation in areas like data structures, Big O notation, design patterns, databases, and full stack development. This portfolio reflects that growth by showing how I took one original CS 320 artifact and rebuilt it into a more complete Spring Boot application with a web interface, persistence, validation, search, sorting, and user authorization. More than anything, it shows my growth, my direction, and the kind of developer I want to keep becoming.
 
-Some of my biggest aha moments in the program came from learning data structures, Big O notation, design patterns, and databases. Before school, I mostly stayed cautious around databases after deleting one in my personal life and creating a lot of extra work for myself, so learning to actually use them in programming was a big step for me. I also came into this project with only light exposure to Spring Boot, but I felt the most confident with Java and wanted to build a full stack application, so it felt like the natural choice. Learning enough Spring Boot to build a beginning to end application with a web interface, persistence, validation, search, sorting, and authorization gave me a lot more confidence in my ability to keep growing as a full stack developer.
-
-[Full Professional Self Assessment](files/professional-self-assessment.docx)
+[Read the full professional self assessment here](files/professional-self-assessment.md)
 
 ## Code Review
 
@@ -70,19 +68,19 @@ I chose this artifact because I wanted to take the core idea of the original pro
 
 For the software design and engineering enhancement, I reworked the original backend only project into a Spring Boot web application with controllers, Thymeleaf pages, reusable fragments, JavaScript for tab behavior, and centralized exception handling. I wanted to use this enhancement because it showed that I could take the original project idea and rebuild it into something more complete, more professional, and much easier for a person to actually interact with.
 
-[Enhancement One Journal](files/enhancement-1.docx)
+[Read the full Enhancement One Journal Here](files/enhancement-1.md)
 
 ## Enhancement Two: Algorithms and Data Structures
 
 For the algorithms and data structures enhancement, I added search and sorting features for contacts, tasks, and appointments. I wanted to use this enhancement because it gave me a way to show algorithmic thinking, time complexity, and trade offs without pretending the goal was just to make everything magically faster. The bigger improvement was making the project more organized and better prepared for cleaner retrieval as it grew.
 
-[Enhancement Two Journal](files/enhancement-2.docx)
+[Read the full Enhancement Two Journal Here](files/enhancement-2.md)
 
 ## Enhancement Three: Databases
 
 For the database enhancement, I moved the project from temporary in memory storage to PostgreSQL so the data would persist, and I also added user authorization. I wanted to use this enhancement because it made the application feel much more realistic and gave me a way to show database integration, persistence, CRUD work, and a stronger focus on controlling access to stored data.
 
-[Enhancement Three Journal](files/enhancement-3.docx)
+[Read the full Enhancement Three Journal Here](files/enhancement-3.md)
 
 ## Course Outcome One
 
