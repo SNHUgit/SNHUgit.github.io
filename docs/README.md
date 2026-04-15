@@ -1,9 +1,3 @@
-# CS 499 ePortfolio
-
-## Documenting my capstone project.
-
-[Follow me on GitHub](https://github.com/SNHUgit)
-
 ## Portfolio Contents
 
 - [Professional Self Assessment](#professional-self-assessment)
