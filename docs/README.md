@@ -1,3 +1,38 @@
+# CS 499 ePortfolio
+
+## Documenting my capstone project.
+
+[Follow me on GitHub](https://github.com/SNHUgit)
+
+## Portfolio Contents
+
+- [Professional Self Assessment](#professional-self-assessment)
+- [Code Review](#code-review)
+- [What It Was](#what-it-was)
+- [Why I Chose It](#why-i-chose-it)
+- [Features Added](#features-added)
+- [Enhancement One: Software Design and Engineering](#enhancement-one-software-design-and-engineering)
+- [Enhancement Two: Algorithms and Data Structures](#enhancement-two-algorithms-and-data-structures)
+- [Enhancement Three: Databases](#enhancement-three-databases)
+- [Course Outcome One](#course-outcome-one)
+- [Course Outcome Two](#course-outcome-two)
+- [Course Outcome Three](#course-outcome-three)
+- [Course Outcome Four](#course-outcome-four)
+- [Course Outcome Five](#course-outcome-five)
+
+## Professional Self Assessment
+
+My time in the Computer Science program helped me turn a long interest in programming into something a lot more real and structured. I have been hobby programming for around 20 years, but for most of that time my code was honestly spaghetti code. I could make things work sometimes, but eventually I would always run into an error or design problem that I did not really understand how to solve. This portfolio shows how that changed by taking one original artifact and rebuilding it into a more complete full stack application across software engineering, algorithms and data structures, and databases.
+
+Some of my biggest aha moments in the program came from learning data structures, Big O notation, design patterns, and databases. Before school, I mostly stayed cautious around databases after deleting one in my personal life and creating a lot of extra work for myself, so learning to actually use them in programming was a big step for me. I also came into this project with only light exposure to Spring Boot, but I felt the most confident with Java and wanted to build a full stack application, so it felt like the natural choice. Learning enough Spring Boot to build a beginning to end application with a web interface, persistence, validation, search, sorting, and authorization gave me a lot more confidence in my ability to keep growing as a full stack developer.
+
+[Full Professional Self Assessment](files/professional-self-assessment.docx)
+
+## Code Review
+
+My code review explains the original CS 320 artifact before the enhancements, identifies areas for improvement, and walks through the changes I planned across software engineering, algorithms and data structures, and databases. It also connects those enhancements to the five course outcomes and shows how the original project was reworked into a more realistic full stack application.
+
+[Watch the Code Review]()
 ## What It Was
 
 This artifact was originally created in CS 320, Software Testing, Automation, and Quality Assurance. In its original form, it was a Java project built around contact, task, and appointment classes with service classes used to add, update, delete, and manage records. It had a solid backend foundation with validation and testing, but it did not have a graphical interface, persistent storage, or even a driver class to run the program, so it still had a lot of room to grow.
