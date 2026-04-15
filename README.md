@@ -24,9 +24,12 @@ I chose this artifact because I wanted to take the core idea of the original pro
 
 For the software design and engineering enhancement, I reworked the original backend only project into a Spring Boot web application with controllers, Thymeleaf pages, reusable fragments, JavaScript for tab behavior, and centralized exception handling. I wanted to use this enhancement because it showed that I could take the original project idea and rebuild it into something more complete, more professional, and much easier for a person to actually interact with.
 
+- [Enhancement One](Enhancement and Assessment Docs/enhancement-1.docx)
+
 ## Enhancement Two: Algorithms and Data Structures
 
 For the algorithms and data structures enhancement, I added search and sorting features for contacts, tasks, and appointments. I wanted to use this enhancement because it gave me a way to show algorithmic thinking, time complexity, and trade offs without pretending the goal was just to make everything magically faster. The bigger improvement was making the project more organized and better prepared for cleaner retrieval as it grew.
+
 
 ## Enhancement Three: Databases
 
