@@ -11,23 +11,23 @@ I chose this artifact because I wanted to take the core idea of the original pro
 
 - **Web GUI:** I built a web based interface so the enhanced application could be used through a browser instead of only existing as backend classes with no real user interaction.
 
-![Gui](images/gui.png)
+![Gui](docs/images/gui.png)
 
 - **PostgreSQL Database Persistence:** I moved the application from temporary in memory storage to PostgreSQL so contacts, tasks, and appointments would persist and the project would feel more like a real system.
 
 - **Data Validation:** I carried validation into the enhanced application so user input could be checked more carefully before being stored or processed.
 
-![Data Validation](images/dataValidation.png)
+![Data Validation](docs/images/dataValidation.png)
 
 - **Sorting:** I added sorting features to make the data easier to organize and use, including alphabetical sorting for tasks and contacts and date based sorting for appointments.
 
 - **Searching:** I added search features for contacts, tasks, and appointments so records could be found more easily and used in a more organized way.
 
-![Gui](images/SortSearch.png)
+![Gui](docs/images/SortSearch.png)
 
 - **User Authorization:** I added user authorization to make the application more realistic by controlling access instead of allowing every user to reach everything.
 
-![Login](images/login.png)
+![Login](docs/images/login.png)
 
 - **Centralized Error Handling:** I added centralized exception handling so the application could respond to problems in a cleaner and more consistent way.
 
@@ -35,19 +35,19 @@ I chose this artifact because I wanted to take the core idea of the original pro
 
 For the software design and engineering enhancement, I reworked the original backend only project into a Spring Boot web application with controllers, Thymeleaf pages, reusable fragments, JavaScript for tab behavior, and centralized exception handling. I wanted to use this enhancement because it showed that I could take the original project idea and rebuild it into something more complete, more professional, and much easier for a person to actually interact with.
 
-[Enhancement One Journal](Enhancement and Assessment Docs/enhancement-1.docx)
+[Enhancement One Journal](docs/files/enhancement-1.docx)
 
 ## Enhancement Two: Algorithms and Data Structures
 
 For the algorithms and data structures enhancement, I added search and sorting features for contacts, tasks, and appointments. I wanted to use this enhancement because it gave me a way to show algorithmic thinking, time complexity, and trade offs without pretending the goal was just to make everything magically faster. The bigger improvement was making the project more organized and better prepared for cleaner retrieval as it grew.
 
-[Enhancement Two Journal](Enhancement and Assessment Docs/enhancement-2.docx)
+[Enhancement Two Journal](docs/files/enhancement-2.docx)
 
 ## Enhancement Three: Databases
 
 For the database enhancement, I moved the project from temporary in memory storage to PostgreSQL so the data would persist, and I also added user authorization. I wanted to use this enhancement because it made the application feel much more realistic and gave me a way to show database integration, persistence, CRUD work, and a stronger focus on controlling access to stored data.
 
-[Enhancement Three Journal](Enhancement and Assessment Docs/enhancement-2.docx)
+[Enhancement Three Journal](docs/files/enhancement-2.docx)
 
 ## Course Outcome One
 
