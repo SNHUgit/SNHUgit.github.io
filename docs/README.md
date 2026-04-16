@@ -24,7 +24,7 @@ My time in the Computer Science program helped me turn a long interest in progra
 
 My code review explains the original CS 320 artifact before the enhancements, identifies areas for improvement, and walks through the changes I planned across software engineering, algorithms and data structures, and databases. It also connects those enhancements to the five course outcomes and shows how the original project was reworked into a more realistic full stack application.
 
-[Watch the Code Review]()
+[Watch the Code Review](images/cs499 code review.mp4)
 ## What It Was
 
 This artifact was originally created in CS 320, Software Testing, Automation, and Quality Assurance. In its original form, it was a Java project built around contact, task, and appointment classes with service classes used to add, update, delete, and manage records. It had a solid backend foundation with validation and testing, but it did not have a graphical interface, persistent storage, or even a driver class to run the program, so it still had a lot of room to grow.
