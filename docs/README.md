@@ -24,6 +24,7 @@ My time in the Computer Science program helped me turn a long interest in progra
 
 My code review explains the original CS 320 artifact before the enhancements, identifies areas for improvement, and walks through the changes I planned across software engineering, algorithms and data structures, and databases. It also connects those enhancements to the five course outcomes and shows how the original project was reworked into a more realistic full stack application.
 
+<video src="images/cs499 code review.mp4" width="320" height="240" controls></video>
 [Watch the Code Review](images/cs499 code review.mp4)
 ## What It Was
 
