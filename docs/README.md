@@ -24,7 +24,7 @@ My time in the Computer Science program helped me turn a long interest in progra
 
 My code review explains the original CS 320 artifact before the enhancements, identifies areas for improvement, and walks through the changes I planned across software engineering, algorithms and data structures, and databases. It also connects those enhancements to the five course outcomes and shows how the original project was reworked into a more realistic full stack application.
 
-p align="center" width="100%">
+<p align="center" width="100%">
 <video src="https://github.com/SNHUgit/SNHUgit.github.io/tree/main/docs/images/codeReview.mp4" width="80%" controls></video>
 </p>
 ## What It Was
