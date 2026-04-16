@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.cs499.organizer.entity.Task;
 
+//Task service defines task operations.
+//Includes:
+//- CRUD work
+//- search
+//- sorting
+
 public interface TaskService {
     List<Task> findAll();
     Task findById(int id);

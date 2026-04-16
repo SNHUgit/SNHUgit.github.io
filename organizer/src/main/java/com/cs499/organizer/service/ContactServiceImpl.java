@@ -8,6 +8,12 @@ import com.cs499.organizer.entity.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//Contact service implementation handles contact logic.
+//Includes:
+//- saving contacts
+//- searching contacts
+//- sorting contacts
+
 @Service
 public class ContactServiceImpl implements ContactService {
 
@@ -65,6 +71,7 @@ public class ContactServiceImpl implements ContactService {
 	return contactRepository.findByNumberContaining(number);
     }
 
+    // Returns all contacts in the selected sort order.
     @Override
     public List<Contact> findAllSorted(String sort) {
         if ("asc".equals(sort)) {
@@ -75,7 +82,8 @@ public class ContactServiceImpl implements ContactService {
             return contactRepository.findAll();
         }
     }
-
+    
+    // Searches contacts and keeps the selected sort order.
     @Override
     public List<Contact> searchAndSortByName(String searchContact, String sort) {
         if ("asc".equals(sort)) {

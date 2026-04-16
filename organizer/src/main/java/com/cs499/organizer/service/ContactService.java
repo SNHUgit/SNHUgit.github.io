@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.cs499.organizer.entity.Contact;
 
+//Contact service defines contact operations.
+//Includes:
+//- CRUD work
+//- search
+//- sorting
+
 public interface ContactService {
     List<Contact> findAll();
     Contact findById(int id);

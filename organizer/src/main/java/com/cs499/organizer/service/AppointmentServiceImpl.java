@@ -9,6 +9,12 @@ import com.cs499.organizer.entity.Appointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//Appointment service implementation handles appointment logic.
+//Includes:
+//- saving appointments
+//- searching appointments
+//- sorting appointments
+
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
@@ -56,6 +62,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	return appointmentRepository.findByDescriptionContaining(description);
     }
 
+    // Returns all appointments in the selected sort order.
     @Override
     public List<Appointment> findAllSorted(String sort) {
         if ("asc".equals(sort)) {
@@ -65,6 +72,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
     }
 
+    // Searches appointments by description and keeps the selected sort order.
+    
     @Override
     public List<Appointment> searchAndSortByDescription(String searchAppointment, String sort) {
         if ("asc".equals(sort)) {

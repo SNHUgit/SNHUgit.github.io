@@ -8,6 +8,12 @@ import com.cs499.organizer.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//Task service implementation handles task logic.
+//Includes:
+//- saving tasks
+//- searching tasks
+//- sorting tasks
+
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -55,6 +61,7 @@ public class TaskServiceImpl implements TaskService {
 	taskRepository.deleteById(id);
     }
 
+    // Returns all tasks in the selected sort order.
     @Override
     public List<Task> findAllSorted(String sort) {
         if ("asc".equals(sort)) {

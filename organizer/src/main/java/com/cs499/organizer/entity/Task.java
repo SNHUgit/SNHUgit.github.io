@@ -13,7 +13,6 @@ import lombok.Setter;
 import lombok.ToString;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AccessLevel;
 
 // Task class models a task.
 // Includes:
@@ -32,7 +31,6 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="task_id")
-//    @Setter(AccessLevel.NONE)
     private int id;
 
     @Column(name="name", nullable = false, length = 50)

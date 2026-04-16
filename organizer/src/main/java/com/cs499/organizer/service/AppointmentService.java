@@ -5,6 +5,12 @@ import java.util.List;
 
 import com.cs499.organizer.entity.Appointment;
 
+//Appointment service defines appointment operations.
+//Includes:
+//- CRUD work
+//- search
+//- sorting
+
 public interface AppointmentService {
     List<Appointment> findAll();
     Appointment findById(int id);

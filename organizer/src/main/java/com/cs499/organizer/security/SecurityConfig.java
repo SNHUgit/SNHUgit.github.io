@@ -9,15 +9,28 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import javax.sql.DataSource;
 
+//Configures application security.
+//Includes:
+//- login rules
+//- access rules
+//- logout behavior
+
 @Configuration
 public class SecurityConfig {
 
+	// Sets up the database backed user details service.
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
 
 	return new JdbcUserDetailsManager(dataSource);
     }
 
+	 // Sets security rules for the application.
+	 // Includes:
+	 // - public pages
+	 // - role based access
+	 // - login and logout setup
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	http.authorizeHttpRequests(auth -> auth.requestMatchers("/login", "/non-auth", "/css/**", "/js/**", "/landing").permitAll()

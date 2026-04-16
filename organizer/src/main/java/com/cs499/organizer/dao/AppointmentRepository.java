@@ -6,6 +6,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+//Appointment repository handles database access for appointments.
+//Includes:
+//- CRUD support
+//- search queries
+//- sorting queries
+
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer>{
     List<Appointment> findByDescriptionContaining(String description);
     List<Appointment> findByDate(Date date);

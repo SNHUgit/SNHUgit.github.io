@@ -6,6 +6,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+//Task repository handles database access for tasks.
+//Includes:
+//- CRUD support
+//- search queries
+//- sorting queries
+
 public interface TaskRepository extends JpaRepository<Task, Integer>{
     List<Task> findByNameContaining(String name);
     List<Task> findByDescriptionContaining(String description);
