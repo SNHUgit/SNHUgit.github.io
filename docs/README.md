@@ -27,6 +27,11 @@ My code review explains the original CS 320 artifact before the enhancements, id
 <p align="center" width="100%">
 <video src="https://github.com/SNHUgit/SNHUgit.github.io/tree/main/docs/images/codeReview.mp4" width="80%" controls></video>
 </p>
+
+<video controls width="100%">
+  <source src="{{ '/images/codeReview.mp4' | relative_url }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 ## What It Was
 
 This artifact was originally created in CS 320, Software Testing, Automation, and Quality Assurance. In its original form, it was a Java project built around contact, task, and appointment classes with service classes used to add, update, delete, and manage records. It had a solid backend foundation with validation and testing, but it did not have a graphical interface, persistent storage, or even a driver class to run the program, so it still had a lot of room to grow.
